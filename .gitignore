@@ -1,1 +1,6 @@
 raw_data/
+__pycache__/
+*.DS_Store
+*.ipynb_checkpoints/
+*.csv
+*.python-version

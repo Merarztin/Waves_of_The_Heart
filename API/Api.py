@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pickle
 import librosa
 import numpy as np
-from API.prepoc import extract_features , dummy_prepoc
+from API.prepoc import extract_features 
 
 
 app = FastAPI()
@@ -28,7 +28,7 @@ async def predict():
     #    f.write(await file.read())
     
     #audio = extract_features('API/temp/audio.wav')
-    audio = dummy_prepoc()
+    audio = extract_features('API/temp/audio.wav')
     
     # predict the class using pre-trained model
     y_pred = app.state.model.predict(audio)
