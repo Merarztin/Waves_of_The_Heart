@@ -3,10 +3,13 @@ import numpy as np
 from scipy.signal import butter, filtfilt, medfilt
 from scipy import signal
 import pywt
+import pickle
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 def extract_features(audio_file_path):
     # Load heart sound audio file
+    print(audio_file_path)
     audio_data, sample_rate = librosa.load(audio_file_path, sr=None, mono=True)
     # Select the first 5 seconds of the audio
     audio_data_5s = audio_data[:5 * sample_rate]
@@ -102,4 +105,10 @@ def extract_features(audio_file_path):
     # Concatenate the two data frames
     merged_features = pd.concat([new_data_2, new_data_1], axis=1)
     
-    return merged_features
+    #Normalizing the features
+    scaler = pickle.load(open('scaler.pkl', 'rb'))
+    normalized_df = pd.DataFrame(scaler.transform(merged_features))
+    
+    return normalized_df
+
+    
